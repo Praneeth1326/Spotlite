@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Spotlite</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="signup-bg">
+    <div class="signup-container">
+      <img src="logo.png" alt="Spotlite Logo" class="signup-logo" >
+      <h1>Sign up to start listening</h1>
+      <form id="regform" autocomplete="on">
+        <label for="email">Email address</label>
+        <input type="email" id="email" required placeholder="name@domain.com" maxlength="40" title="Please enter the email">
+        <p class="alt-link"><a href="#" id="use-phone">Use phone number instead.</a></p>
+
+        <div id="phone-field" style="display:none;">         
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone"  placeholder="+91XXXXXXXXXX" maxlength="13" required>
+        </div>
+
+        <a href="spotlitehome.html" class="main-btn" style="display:block; text-align:center; text-decoration:none; margin:18px 0 10px 0;">Next</a>
+
+        <div class="divider"><span>or</span></div>
+
+        <button type="button" class="alt-btn google" onclick="location.href='https://accounts.google.com/'">
+          <i class="fab fa-google"></i> Sign up with Google
+        </button>
+        <button type="button" class="alt-btn facebook" onclick="location.href='https://www.facebook.com/'">
+          <i class="fab fa-facebook-f"></i> Sign up with Facebook
+        </button>
+        <button type="button" class="alt-btn apple" onclick="location.href='https://www.apple.com/'">
+          <i class="fab fa-apple"></i> Sign up with Apple
+        </button>
+
+        <p class="login-link">Already have an account? <a href="spotlitelogin.html">Log in here.</a></p>
+        <p class="recaptcha-note">
+          This site is protected by reCAPTCHA and the Google<br>
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </p>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var usePhone = document.getElementById('use-phone');
+      if(usePhone){
+        usePhone.onclick = function(e) {
+          e.preventDefault();
+          document.getElementById('phone-field').style.display = 'block';
+          this.style.display = 'none';
+        };
+      }
+    });
+  </script>
+</body>
+</html>

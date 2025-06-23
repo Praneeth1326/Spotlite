@@ -1,0 +1,197 @@
+<html>
+    <head>
+        <title>
+      Spotlite
+        </title>
+        <link rel="icon" href="logo.png" type="image/png" style="height: 200px; width: 200px;">
+        <link rel="stylesheet" href="spotlitehome.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+    <body>
+        <div class="header">
+            <img src="logo.png" alt="Spotlite Logo" style="width: 220px; height: 80px;">
+            <i class="fas fa-home" style="color: #0be922;font-size: 2em;"><a href="#"></i>
+            <input type="search" placeholder="What do you want to play" id="search"></input>
+            <label for="search"></label>
+            <h1><a href="spotlitesignup.html">Sign up</a></h1>
+            <h1><a href="spotlitelogin.html">Log in</a></h1>
+        </div>
+       <div class="article">
+           <aside class="adn">
+               <ul class="accordion">
+                   <li>
+                       <input type="radio" name="accordion" id="first">
+                       <label for="first">Create</label>
+                       <div class="content">
+                           <p>If we acknowledge the possibility that a quantum computer </>
+                           </p>
+                       </div>
+                   </li>
+                   <li>
+        <input type="radio" name="accordion" id="second">
+        <label for="second">Liked Songs</label>
+        <div class="content">
+            <p>Quantum Key distribution is the logical </p>
+        </div>
+    </li>
+      <li>
+        <input type="radio" name="accordion" id="third">
+        <label for="third">Recent Played</label>
+        <div class="content">
+            <p>A productsistant to quantum computer-based attacks.  </p>
+        </div>
+    </li>
+      <li>
+        <input type="radio" name="accordion" id="fourth">
+        <label for="fourth">Download  
+</label>
+        <div class="content">
+            <p> Optimization is at the Heart of Finance. With Q-Folio pro a quantum-hybrid  </p>
+        </div>
+    </li>
+</ul>
+        </aside>
+        <section class="mainsongs">
+        </section>
+    </article>
+    <footer class="footer-player">
+  <button id="footer-prev" class="footer-btn"><i class="fas fa-backward"></i></button>
+  <button id="footer-play" class="footer-btn"><i class="fas fa-play"></i></button>
+  <button id="footer-next" class="footer-btn"><i class="fas fa-forward"></i></button>
+  <input type="range" id="footer-progress" value="0" min="0" max="100" step="1">
+</footer>
+    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const section = document.querySelector(".mainsongs");
+    section.innerHTML = "<p>Loading songs...</p>";
+
+    fetch("playlist.json")
+        .then(response => response.json())
+        .then(data => {
+            section.innerHTML = "";
+            data.music.forEach((music, idx) => {
+                const songDiv = document.createElement("div");
+                songDiv.className = "song-item";
+                songDiv.innerHTML = `
+                    <div class="img-container" style="position:relative;">
+                        <img src="${music.image}" alt="${music.songname}">
+                        <button class="play-btn" data-audio="audio${idx}">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <audio id="audio${idx}" src="${music.musicmp3}"></audio>
+                    </div>
+                    <span>${music.songname} <br><small>${music.musicsinger}</small></span>
+                `;
+                section.appendChild(songDiv);
+            });
+
+           
+            const audios = Array.from(section.querySelectorAll('audio'));
+            const playBtns = Array.from(section.querySelectorAll('.play-btn'));
+            let currentIdx = 0;
+
+        
+            const footerPlayBtn = document.getElementById('footer-play');
+            const footerPrevBtn = document.getElementById('footer-prev');
+            const footerNextBtn = document.getElementById('footer-next');
+            const footerProgress = document.getElementById('footer-progress');
+
+          
+            function updateIcons() {
+                playBtns.forEach((btn, idx) => {
+                    btn.querySelector('i').className = (idx === currentIdx && !audios[idx].paused) ? 'fas fa-pause' : 'fas fa-play';
+                });
+                footerPlayBtn.querySelector('i').className = !audios[currentIdx].paused ? 'fas fa-pause' : 'fas fa-play';
+            }
+
+  
+            playBtns.forEach((btn, idx) => {
+                btn.addEventListener('click', function () {
+                    if (!audios[idx].paused) {
+                        audios[idx].pause();
+                    } else {
+                        audios.forEach((a, i) => { if (i !== idx) a.pause(); });
+                        audios[idx].currentTime = 0;
+                        audios[idx].play();
+                        currentIdx = idx;
+                    }
+                    updateIcons();
+                });
+            });
+
+      
+            footerPlayBtn.addEventListener('click', function () {
+                const audio = audios[currentIdx];
+                if (!audio.paused) {
+                    audio.pause();
+                } else {
+                    audios.forEach((a, i) => { if (i !== currentIdx) a.pause(); });
+                    audio.play();
+                }
+                updateIcons();
+            });
+
+            footerPrevBtn.addEventListener('click', function () {
+                audios[currentIdx].pause();
+                currentIdx = (currentIdx - 1 + audios.length) % audios.length;
+                audios.forEach((a, i) => { if (i !== currentIdx) a.pause(); });
+                audios[currentIdx].currentTime = 0;
+                audios[currentIdx].play();
+                updateIcons();
+            });
+
+     
+            footerNextBtn.addEventListener('click', function () {
+                audios[currentIdx].pause();
+                currentIdx = (currentIdx + 1) % audios.length;
+                audios.forEach((a, i) => { if (i !== currentIdx) a.pause(); });
+                audios[currentIdx].currentTime = 0;
+                audios[currentIdx].play();
+                updateIcons();
+            });
+
+         
+            function updateFooterProgress() {
+                const audio = audios[currentIdx];
+                if (audio.duration) {
+                    footerProgress.value = (audio.currentTime / audio.duration) * 100;
+                } else {
+                    footerProgress.value = 0;
+                }
+            }
+            audios.forEach((audio, idx) => {
+                audio.addEventListener('timeupdate', function () {
+                    if (idx === currentIdx) updateFooterProgress();
+                });
+                audio.onended = () => {
+                    playBtns[idx].querySelector('i').className = 'fas fa-play';
+                    if (idx === currentIdx) {
+                        currentIdx = (currentIdx + 1) % audios.length;
+                        audios[currentIdx].currentTime = 0;
+                        audios[currentIdx].play();
+                        updateIcons();
+                    }
+                };
+            });
+
+    
+            footerProgress.addEventListener('input', function () {
+                const audio = audios[currentIdx];
+                if (audio.duration) {
+                    audio.currentTime = (footerProgress.value / 100) * audio.duration;
+                }
+            });
+        })
+        .catch(error => {
+            section.innerHTML = "<p>Failed to load songs.</p>";
+            console.error(error);
+        });
+});
+</script>
+    </body>
+</html>

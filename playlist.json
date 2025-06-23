@@ -1,0 +1,65 @@
+{
+    "music": [
+        {
+            "image": "songs/baahubali/Baahubali-2-jpeg.jpg",
+            "songname": "Baahubali",
+            "musicmp3": "songs/baahubali/1-Bale Bale Bale _Daler Mehndi.mp3",
+            "musicsinger": "Daler Mehndi, Maragadamani, Mounima"
+        },
+        {
+            "image": "songs/good/good-bad-ugly.jpg",
+            "songname": "OG",
+            "musicmp3": "songs/good/OG Sambavam_GV Prakash Kumar.mp3",
+            "musicsinger": "Anirudh Ravichander"
+        },
+        {
+            "image": "songs/hit3/Hit3.jpg",
+            "songname": "Thanu",
+            "musicmp3": "songs/hit3/Thanu_Anirudh Ravichander.mp3",
+            "musicsinger": "Anirudh Ravichander"
+        },
+        {
+            "image": "songs/kingdom/Kingdom.jpg",
+            "songname": "Hridayam Lopala",
+            "musicmp3": "songs/kingdom/Hridayam Lopala_Anirudh Ravichander.mp3",
+            "musicsinger": "Anirudh Ravichander"
+        },
+        {
+            "image": "songs/pushpa2/puspha2.jpg",
+            "songname": "Kissik",
+            "musicmp3": "songs/pushpa2/Kissik_Sublahshini.mp3",
+            "musicsinger": " Sublahshini"
+        },
+        {
+            "image": "songs/court/court.jpg",
+            "songname": "Premalo",
+            "musicmp3": "songs/court/Premalo.mp3",
+            "musicsinger": " Anurag Kulkarni, Sameera Bharadwaj"
+        },
+               {
+            "image": "songs/telugufolk/TeluguFolk.jpg",
+            "songname": "Ranu Bombai ki ranu",
+            "musicmp3": "songs/telugufolk/RANU BOMBAI KI RANU.mp3",
+            "musicsinger": " Janhavi Yerram"
+        },
+               {
+            "image": "songs/madsquare/Mad-Square-Songs.jpg",
+            "songname": "Swathi Reddy",
+            "musicmp3": "songs/madsquare/Swathi Reddy.mp3",
+            "musicsinger": " Bheems Ceciroleo, Swathi Reddy UK"
+        },
+               {
+            "image": "songs/retro/retro.jpg",
+            "songname": "The one song",
+            "musicmp3": "songs/retro/The One.mp3",
+            "musicsinger": "Sid Sriram, Santhosh Narayanan"
+        },
+        {
+            "image": "songs/hanuman/Hanu-Man-2024.jpg",
+            "songname": "Hanuman Chalisa",
+            "musicmp3": "songs/hanuman/Hanuman Chalisa.mp3",
+            "musicsinger": "Sai Charan"
+        }
+       
+    ]
+}
